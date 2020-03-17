@@ -44,6 +44,7 @@ import org.traccar.handler.FilterHandler;
 import org.traccar.handler.GeocoderHandler;
 import org.traccar.handler.GeolocationHandler;
 import org.traccar.handler.HemisphereHandler;
+import org.traccar.handler.KafkaTopicHandler;
 import org.traccar.handler.MotionHandler;
 import org.traccar.handler.NetworkMessageHandler;
 import org.traccar.handler.OpenChannelHandler;
@@ -140,6 +141,8 @@ public abstract class BasePipelineFactory extends ChannelInitializer<Channel> {
                 WebDataHandler.class,
                 DefaultDataHandler.class);
 
+        pipeline.addLast(new KafkaTopicHandler(null));
+                
         if (eventsEnabled) {
             addHandlers(
                     pipeline,
